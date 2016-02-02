@@ -4,23 +4,33 @@ import {
   GET_JOBS_SUCCESS, 
   UPDATE_JOB_SUCCESS,
   SELECT_JOB,
-  DESELECT_JOB
+  DESELECT_JOB,
+	DELETE_JOB_SUCCESS
 } from './actions'
 
+let emptyJob = {
+  isSelected: false,
+  name: "",
+  city: "",
+  post: "",
+  status: 0,
+  id: -1
+}
 
 const initialState = {
-  selectedJob,
+  selectedJob:emptyJob,
   jobs: []
 }
 
-function selectedJob (state = null, action) {
+function selectedJob (state = emptyJob, action) {
 
   switch (action.type) {
   case SELECT_JOB:
-    return action.job
+    let job = Object.assign({},{isSelected:true},action.job)
+    return job
 
   case DESELECT_JOB:
-    return null 
+    return emptyJob 
 
   default:
     return state
@@ -42,6 +52,11 @@ function jobs (state = [], action) {
     
   case GET_JOBS_SUCCESS:
     return action.jobs
+
+	case DELETE_JOB_SUCCESS:
+    let deletedJob = action.job
+    let notDeleted = state.filter(x => x.id !== deletedJob.id)
+		return notDeleted 
 
   default:
     return state

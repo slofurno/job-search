@@ -1,5 +1,6 @@
 import request from './request'
 export const ADD_JOB = 'ADD_JOB'
+export const CREATE_NEW_JOB = 'CREATE_NEW_JOB'
 
 export const POST_JOB_REQUEST = 'POST_JOB_REQUEST'
 export const POST_JOB_SUCCESS = 'POST_JOB_SUCCESS'
@@ -7,6 +8,8 @@ export const POST_JOB_FAILURE = 'POST_JOB_FAILURE'
 
 export const UPDATE_JOB_REQUEST = 'UPDATE_JOB_REQUEST' 
 export const UPDATE_JOB_SUCCESS = 'UPDATE_JOB_SUCCESS'
+
+export const DELETE_JOB_SUCCESS = 'DELETE_JOB_SUCCESS'
 
 export const SELECT_JOB = 'SELECT_JOB'
 export const DESELECT_JOB = 'DESELECT_JOB'
@@ -23,7 +26,27 @@ function getJobsSuccess (jobs) {
   }
 }
 
-export function addJob (job) {
+const _newJob = {
+	name: "",
+	city: "",
+	status: 0,
+	post : ""
+}
+
+export function deselectJob () {
+	return {
+		type: DESELECT_JOB
+	}
+}
+
+export function newJob () {
+	return {
+		type: SELECT_JOB,
+		job: _newJob				
+	}
+}
+
+function addJob (job) {
   return {
     type: ADD_JOB,
     job
@@ -48,7 +71,6 @@ function updateJobSuccess (job) {
 }
 
 export function selectJob (job) {
-  console.log(job)
   return {
     type: SELECT_JOB,
     job
@@ -78,6 +100,8 @@ export function getJobs () {
 
 export function updateJob (job) {
   return function (dispatch) {
+		dispatch(deselectJob())
+
     return request ({
       url: `${jobsUrl}/${job.id}`,
       method: "PUT",
@@ -91,10 +115,25 @@ export function updateJob (job) {
   }
 }
 
+export function deleteJob (job) {
+	return function(dispatch) {
+		dispatch({
+			type: DELETE_JOB_SUCCESS,
+			job
+		})
+
+		return request({
+      url: `${jobsUrl}/${job.id}`,
+			method: "DELETE"
+		})
+
+	}
+}
+
 export function postJob (job) {
   return function (dispatch) {
-    dispatch(addJob(job)) 
-    //
+		dispatch(deselectJob())
+
     return request ({
       url: jobsUrl,
       method: "POST",
@@ -103,6 +142,8 @@ export function postJob (job) {
         "Content-Type": "application/json"
       }
     })
+		.then(parseResponse)
+		.then((res) => dispatch(addJob(res)))
       .catch(err => {
         console.log(err);
         dispatch(postJobFailure(job))

@@ -3,18 +3,30 @@ import React, { Component, PropTypes } from 'react'
 export default class JobModal extends Component {
   closeModal (e) {
     e.stopPropagation()
-    console.log("CLOSE MODAL");
+		this.props.cancelModal()
   }
 
   stopP (e) {
     e.stopPropagation()
   }
 
+
+  handleClick(e) {
+		e.preventDefault()
+    const name = this.refs.name.value
+    const city = this.refs.city.value
+		const post = " HEY"	
+		const {id, status} = this.props.selectedJob
+    this.props.updateJob({
+			id, name, city, post, status
+		})
+  }
+
   render () {
 
-    const {selectedJob} = this.props
+    const {updateJob, selectedJob} = this.props
 
-    if (!selectedJob) {
+    if (!selectedJob.isSelected) {
       return (<div></div>)
     }
 
@@ -40,17 +52,22 @@ export default class JobModal extends Component {
     }
 
     return (
-      <div style={background} onClick={this.closeModal}>
+      <div style={background} onClick={e => this.closeModal(e)}>
         <div style={modalContainer} onClick={this.stopP}>
         <div className={"card"} 
              style={{
                backgroundColor:"ghostwhite"
              }}>
           <ul>
-            <li>{selectedJob.name}</li>
-            <li>{selectedJob.name}</li>
-            <li>{selectedJob.name}</li>
-            <li>{selectedJob.name}</li>
+            <li>
+            <input type="text" ref="name" defaultValue={selectedJob.name}/>
+            </li>
+
+            <li>
+            <input type="text" ref="city" defaultValue={selectedJob.city}/>
+            </li>
+
+            <li><a href="#" onClick={(e) => this.handleClick(e)}>Save</a></li>
           </ul>
           </div>
         </div>

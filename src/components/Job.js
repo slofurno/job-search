@@ -4,6 +4,7 @@ export default class Job extends Component {
   render() {
   const { 
     onEditClick, 
+		onDeleteClick,
     id, 
     name, 
     city, 
@@ -14,13 +15,23 @@ export default class Job extends Component {
 	let mystatus = status || 2
 	let width = `${(mystatus/5) * 100|0}%`
 	let statusBar = <div className={"bargraph"} style={{width}}> </div>
-  let editMe = () => onEditClick({
-    id,
-    name,
-    city,
-    status,
-    post 
-  })
+  let editMe = (e) => {
+		e.preventDefault()
+		onEditClick({
+			id,
+			name,
+			city,
+			status,
+			post 
+		})
+	}
+
+	let deleteMe = (e) => {
+		e.preventDefault()
+		onDeleteClick({
+			id
+		})
+	}
 
     return (
       <div className={"card raised"}>
@@ -30,6 +41,7 @@ export default class Job extends Component {
           <li> {post} </li>
 					<li> {statusBar} </li>
           <li> <a href="#" onClick={editMe}>edit</a> </li>
+          <li> <a href="#" onClick={deleteMe}>delete</a> </li>
         </ul>
       </div>
     )

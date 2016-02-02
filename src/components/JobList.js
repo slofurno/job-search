@@ -3,10 +3,10 @@ import Job from './Job'
 
 export default class JobList extends Component {
   render () {
-    const { jobs } = this.props
+    const { jobs, onJobSelect} = this.props
 
     let joblist = jobs.map(job => 
-        <Job {...job} key={job.id}/>
+        <Job {...job} key={job.id} onEditClick={onJobSelect}/>
     )
 
     return (

@@ -1,14 +1,17 @@
 import React, { Component, PropTypes } from 'react'
 import JobList from './JobList'
+import JobModal from './JobModal'
 import { connect } from 'react-redux'
+import { addJob, selectJob } from '../actions'
 
 class App extends Component {
   render () {
-    const { dispatch, jobs } = this.props
+    const { dispatch, jobs, selectedJob } = this.props
 
     return (
       <div>
-        <JobList jobs={jobs}/>
+        <JobModal selectedJob={selectedJob}/>
+        <JobList jobs={jobs} onJobSelect={job => dispatch(selectJob(job))}/>
       </div>
     )
   }

@@ -2,12 +2,29 @@ import { combineReducers } from 'redux'
 import { 
   ADD_JOB, 
   GET_JOBS_SUCCESS, 
-  UPDATE_JOB_SUCCESS 
+  UPDATE_JOB_SUCCESS,
+  SELECT_JOB,
+  DESELECT_JOB
 } from './actions'
 
 
 const initialState = {
+  selectedJob,
   jobs: []
+}
+
+function selectedJob (state = null, action) {
+
+  switch (action.type) {
+  case SELECT_JOB:
+    return action.job
+
+  case DESELECT_JOB:
+    return null 
+
+  default:
+    return state
+  } 
 }
 
 function jobs (state = [], action) {
@@ -32,7 +49,8 @@ function jobs (state = [], action) {
 }
 
 const rootReducer = combineReducers({
-  jobs 
+  jobs,
+  selectedJob
 })
 
 export default rootReducer

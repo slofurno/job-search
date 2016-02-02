@@ -8,6 +8,8 @@ export const POST_JOB_FAILURE = 'POST_JOB_FAILURE'
 export const UPDATE_JOB_REQUEST = 'UPDATE_JOB_REQUEST' 
 export const UPDATE_JOB_SUCCESS = 'UPDATE_JOB_SUCCESS'
 
+export const SELECT_JOB = 'SELECT_JOB'
+export const DESELECT_JOB = 'DESELECT_JOB'
 
 export const GET_JOBS_SUCCESS = 'GET_JOBS_SUCCESS'
 
@@ -21,7 +23,7 @@ function getJobsSuccess (jobs) {
   }
 }
 
-function addJob (job) {
+export function addJob (job) {
   return {
     type: ADD_JOB,
     job
@@ -41,6 +43,14 @@ function postJobSuccess (job) {
 function updateJobSuccess (job) {
   return {
     type: UPDATE_JOB_SUCCESS,
+    job
+  }
+}
+
+export function selectJob (job) {
+  console.log(job)
+  return {
+    type: SELECT_JOB,
     job
   }
 }

@@ -14,7 +14,7 @@ import {
 class App extends Component {
 
   render () {
-    const { dispatch, jobs, selectedJob } = this.props
+    const { dispatch, jobs, selectedJob, history } = this.props
 
 		let fn = selectedJob.id >= 0 ? updateJob : postJob
 
@@ -33,6 +33,7 @@ class App extends Component {
         />
         <JobList
           jobs = {jobs} 
+          history = {history}
           onJobSelect={job => dispatch(selectJob(job))}
           onJobDelete ={job => dispatch(deleteJob(job))}
         />

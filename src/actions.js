@@ -1,6 +1,7 @@
 import request from './request'
 export const ADD_JOB = 'ADD_JOB'
 export const CREATE_NEW_JOB = 'CREATE_NEW_JOB'
+export const GET_JOBS_SUCCESS = 'GET_JOBS_SUCCESS'
 
 export const POST_JOB_REQUEST = 'POST_JOB_REQUEST'
 export const POST_JOB_SUCCESS = 'POST_JOB_SUCCESS'
@@ -14,9 +15,12 @@ export const DELETE_JOB_SUCCESS = 'DELETE_JOB_SUCCESS'
 export const SELECT_JOB = 'SELECT_JOB'
 export const DESELECT_JOB = 'DESELECT_JOB'
 
-export const GET_JOBS_SUCCESS = 'GET_JOBS_SUCCESS'
+export const ADD_HISTORY = 'ADD_HISTORY'
+export const GET_HISTORY_SUCCESS = 'GET_HISTORY_SUCCESS'
 
 const jobsUrl = 'http://192.168.1.104:4000/api/jobs'
+const historyUrl = 'http://192.168.1.104:4000/api/history'
+
 const tempJob = {}
 
 function getJobsSuccess (jobs) {
@@ -70,6 +74,13 @@ function updateJobSuccess (job) {
   }
 }
 
+function getHistorySuccess (history) {
+  return {
+    type: GET_HISTORY_SUCCESS,
+    history
+  }
+}
+
 export function selectJob (job) {
   return {
     type: SELECT_JOB,
@@ -84,6 +95,18 @@ function parseResponse (n) {
 
 function logError (err) {
   return console.error(err)
+}
+
+export function getHistory () {
+  return function (dispatch) {
+    return request ({
+      url: historyUrl,
+      method: "GET" 
+    })
+    .then(parseResponse)
+    .then(history => dispatch(getHistorySuccess(history)))
+    .catch(logError)
+  }
 }
 
 export function getJobs () {

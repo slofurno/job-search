@@ -5,7 +5,8 @@ import {
   UPDATE_JOB_SUCCESS,
   SELECT_JOB,
   DESELECT_JOB,
-	DELETE_JOB_SUCCESS
+	DELETE_JOB_SUCCESS,
+  GET_HISTORY_SUCCESS
 } from './actions'
 
 let emptyJob = {
@@ -37,8 +38,20 @@ function selectedJob (state = emptyJob, action) {
   } 
 }
 
+
+
+function history (state = [], action) {
+  switch (action.type) {
+  case GET_HISTORY_SUCCESS:
+    return action.history
+
+  default:
+    return state
+  } 
+
+}
+
 function jobs (state = [], action) {
-  console.log(action.type);
   switch (action.type) {
   case ADD_JOB:
     return [
@@ -65,7 +78,8 @@ function jobs (state = [], action) {
 
 const rootReducer = combineReducers({
   jobs,
-  selectedJob
+  selectedJob,
+  history
 })
 
 export default rootReducer

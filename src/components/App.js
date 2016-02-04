@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react'
 import JobList from './JobList'
 import JobModal from './JobModal'
+import JobCalendar from './JobCalendar'
+import JobBuckets from './JobBuckets'
 import { connect } from 'react-redux'
 import { 
 	postJob, 
@@ -25,13 +27,15 @@ class App extends Component {
 					dispatch(newJob()) }}>
 					Add Job
 				</a>
+        
+        <JobCalendar jobs={jobs} history={history}/>
 
         <JobModal 
           selectedJob = {selectedJob} 
           updateJob = {job => dispatch(fn(job))}
 					cancelModal = {() => dispatch(deselectJob())}
         />
-        <JobList
+        <JobBuckets
           jobs = {jobs} 
           history = {history}
           onJobSelect={job => dispatch(selectJob(job))}

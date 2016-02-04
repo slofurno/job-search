@@ -1,11 +1,17 @@
 import React, { Component, PropTypes } from 'react'
 
+const statuses = [
+  "nothing",
+  "applied",
+  "interview scheduled",
+  "interviewed"
+]
+
 export default class Job extends Component {
   render() {
     const { 
       onEditClick, 
       onDeleteClick,
-      history,
       id, 
       name, 
       city, 
@@ -13,9 +19,6 @@ export default class Job extends Component {
       status 
     } = this.props
 
-    let mystatus = status || 2
-    let width = `${(mystatus/5) * 100|0}%`
-    let statusBar = <div className={"bargraph"} style={{width}}> </div>
     let editMe = (e) => {
       e.preventDefault()
       onEditClick({
@@ -34,20 +37,13 @@ export default class Job extends Component {
       })
     }
 
-    let statusHistory = history.map(x => {
-      return <li key={x.id}>{(new Date(x.time)).toLocaleString()}</li> 
-    })
-
     return (
-      <div className={"card raised"}>
-        <ul>
-          <li> {name} </li>
-          <li> {city} </li>
-          <li> {post} </li>
-					<li> <ul> {statusHistory} </ul> </li>
-          <li> <a href="#" onClick={editMe}>edit</a> </li>
-          <li> <a href="#" onClick={deleteMe}>delete</a> </li>
-        </ul>
+      <div style={{padding:"12px 2px"}}>
+          <span className="fake-input">{name}</span>
+          <span className="fake-input">{city}</span>
+          <a href="#" onClick={editMe} className="small">edit</a>
+          <span>  </span>
+          <a href="#" onClick={deleteMe} className="small">delete</a>
       </div>
     )
   }

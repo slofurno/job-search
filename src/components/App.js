@@ -32,26 +32,31 @@ class App extends Component {
 
     return (
       <div className="flex column stretch" style={{height:"100%", position:"relative"}}>
-        <div style={{
-          width: "100%", 
-          backgroundColor: "RGBA(0,0,0,.1)",
-          padding: "4px 10px"
-        }}>
-          <a href="#" onClick={ (e) => {
+        <div 
+          className="flex noshrink" 
+          style={{
+            height: "32px",
+            width: "100%", 
+            backgroundColor: "RGBA(0,0,0,.15)",
+            padding: "2px 4px"
+          }}
+        >
+          <a href="#" 
+            className="flex noshrink"
+            style={{padding:"6px", backgroundColor:"RGBA(0,0,0,.15)"}} 
+            onClick={ (e) => {
             e.preventDefault()
             dispatch(newJob()) }}>
             Add Job
           </a>
           <JobCalendar jobs={jobs} history={history}/>
         </div>
-        <div className="flex grow">
-          <JobBuckets
-            jobs = {myjobs} 
-            history = {history}
-            onJobSelect={job => dispatch(selectJob(job))}
-            onJobDelete ={job => dispatch(deleteJob(job))}
-          />
-        </div>
+        <JobBuckets
+          jobs = {myjobs} 
+          history = {history}
+          onJobSelect={job => dispatch(selectJob(job))}
+          onJobDelete ={job => dispatch(deleteJob(job))}
+        />
         <JobModal 
           selectedJob = {myselectedjob} 
           updateJob = {job => dispatch(fn(job))}

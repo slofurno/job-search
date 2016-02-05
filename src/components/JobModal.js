@@ -53,7 +53,7 @@ export default class JobModal extends Component {
 
     let jobStatus = "nothing"
 
-    if (selectedJob.history) {
+    if (selectedJob.history && selectedJob.history.length > 0) {
       jobStatus = selectedJob.history.slice(-1)[0].status
     }
 

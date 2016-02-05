@@ -32,11 +32,11 @@ export default class JobCalendar extends Component {
         backgroundColor: blues[colorIndex]
       }
 
-      return (<div key={i} className="calendar-square" style={bg}></div>)
+      return (<div key={i} className="flex calendar-square" style={bg}></div>)
     })
  
     return (
-      <div> {dayDisplay} </div>
+      <div className="flex column center wrap fill pack-end" style={{margin:"0 10px"}}> {dayDisplay} </div>
     )
   }
 }

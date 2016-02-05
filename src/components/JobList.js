@@ -18,9 +18,15 @@ export default class JobList extends Component {
     })
 
     return (
-      <div className="card job-card" style={{width:"270px", margin:"0 5px"}}>
-      <div className="header">{title}</div>
-      {joblist}
+      <div className="flex column">
+        <div className="card job-card flex column" 
+          style={{
+            width:"270px", 
+            margin:"0 5px"
+          }}>
+          <div className="header flex noshrink">{title}</div>
+          <div className="flex column" style={{overflow:"auto"}}>{joblist}</div>
+        </div>
       </div>
     )
   }

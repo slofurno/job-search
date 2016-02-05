@@ -2,11 +2,11 @@ import React, { Component, PropTypes } from 'react'
 import JobList from './JobList'
 
 const titles = [
-  "nothing",
-  "applied",
-  "interview scheduled",
-  "interviewed",
-  "offered"
+  "Nothing",
+  "Applied",
+  "Interview scheduled",
+  "Interviewing",
+  "Post Interview"
 ]
 
 export default class JobBuckets extends Component {
@@ -25,8 +25,16 @@ export default class JobBuckets extends Component {
     let jobBuckets = buckets.map((jobs, i) => <JobList key={i} jobs={jobs} title={titles[i]} onJobSelect={onJobSelect} onJobDelete={onJobDelete}/>)
 
     return (
-      <div style={{width:"100%", padding:"5px 0", marginBottom:"20px", whiteSpace:"nowrap", overflowX:"auto"}}>
-      <div>{jobBuckets}</div>
+      <div 
+        className="flex grow"
+        style={{
+          width:"100%", 
+          padding:"5px 0", 
+          marginBottom:"20px",
+          whiteSpace:"nowrap",
+          overflowX:"auto"
+      }}>
+      {jobBuckets}
       </div>
     )
   }

@@ -38,7 +38,7 @@ export default class Job extends Component {
 
     return (
       <div 
-        className="job-display" 
+        className="job-display flex noshrink" 
         onClick={editMe} 
       >
           <span>{editDate}</span>

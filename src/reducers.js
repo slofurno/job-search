@@ -47,6 +47,8 @@ function history (state = [], action) {
     return action.history
   case POST_HISTORY_SUCCESS:
     return state.concat([action.history])
+  case DELETE_JOB_SUCCESS:
+    return state.filter(x => x.job !== action.job.id)
   default:
     return state
   } 

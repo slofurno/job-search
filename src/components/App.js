@@ -69,6 +69,7 @@ class App extends Component {
         <JobModal 
           selectedJob = {myselectedjob} 
           updateJob = {job => dispatch(fn(job))}
+          deleteJob ={job => dispatch(deleteJob(job))}
 					cancelModal = {() => dispatch(deselectJob())}
           addStatus = {h => dispatch(postHistory(h))}
         />

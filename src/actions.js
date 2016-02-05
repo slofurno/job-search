@@ -162,18 +162,22 @@ export function updateJob (job) {
   }
 }
 
+function deleteJobSuccess (job) {
+  return {
+    type: DELETE_JOB_SUCCESS,
+    job
+  }
+}
+
 export function deleteJob (job) {
 	return function(dispatch) {
-		dispatch({
-			type: DELETE_JOB_SUCCESS,
-			job
-		})
-
 		return request({
       url: `${jobsUrl}/${job.id}`,
 			method: "DELETE"
 		})
-
+    .then(() => dispatch(deleteJobSuccess(job)))
+    .then(() => dispatch(deselectJob()))
+    .catch(logError)
 	}
 }
 

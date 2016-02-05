@@ -24,7 +24,7 @@ export default class JobModal extends Component {
 
   render () {
 
-    const {updateJob, selectedJob, addStatus} = this.props
+    const {updateJob, deleteJob, selectedJob, addStatus} = this.props
 
     if (selectedJob.id < 0) {
       return (<div></div>)
@@ -86,6 +86,7 @@ export default class JobModal extends Component {
             />
             <a className="link" href="#" onClick={(e) => this.handleClick(e)}>Save</a>
             <a className="link" href="#" onClick={(e) => addStatus({job:selectedJob.id, status:"tevs"})}>Move >>></a>
+            <a className="link" href="#" onClick={(e) => deleteJob(selectedJob)}>Delete</a>
           </div>
         </div>
       </div>

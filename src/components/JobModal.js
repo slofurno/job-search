@@ -24,7 +24,7 @@ export default class JobModal extends Component {
 
   render () {
 
-    const {updateJob, selectedJob} = this.props
+    const {updateJob, selectedJob, addStatus} = this.props
 
     if (selectedJob.id < 0) {
       return (<div></div>)
@@ -51,11 +51,13 @@ export default class JobModal extends Component {
       height: "400px"
     }
 
+    /*
     let jobStatus = "nothing"
 
     if (selectedJob.history && selectedJob.history.length > 0) {
       jobStatus = selectedJob.history.slice(-1)[0].status
     }
+    */
 
     return (
       <div style={background} onClick={e => this.closeModal(e)}>
@@ -80,9 +82,10 @@ export default class JobModal extends Component {
             <input 
               className="job-display" 
               type="text" ref="status" 
-              defaultValue={jobStatus}
+              defaultValue={selectedJob.lastStatus}
             />
-            <a className="block link" href="#" onClick={(e) => this.handleClick(e)}>Save</a>
+            <a className="link" href="#" onClick={(e) => this.handleClick(e)}>Save</a>
+            <a className="link" href="#" onClick={(e) => addStatus({job:selectedJob.id, status:"tevs"})}>Move >>></a>
           </div>
         </div>
       </div>

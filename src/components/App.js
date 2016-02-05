@@ -10,8 +10,17 @@ import {
 	selectJob, 
 	deselectJob, 
 	updateJob,
-	deleteJob
+	deleteJob,
+  postHistory
 } from '../actions'
+
+const titles = [
+  "Nothing",
+  "Applied",
+  "Interview scheduled",
+  "Interviewing",
+  "Post Interview"
+]
 
 class App extends Component {
 
@@ -20,9 +29,9 @@ class App extends Component {
 
     let myjobs = jobs.map(job => {
       let myhistory = history.filter(x => x.job === job.id)
-      console.log(myhistory)
       myhistory.sort((a,b) => a.time - b.time)
-      return Object.assign({}, job, {history: myhistory})
+      let lastStatus = titles[myhistory.length]
+      return Object.assign({}, job, {lastStatus}, {history: myhistory})
     })
 
 		let fn = selectedJob.id >= 0 ? updateJob : postJob
@@ -61,6 +70,7 @@ class App extends Component {
           selectedJob = {myselectedjob} 
           updateJob = {job => dispatch(fn(job))}
 					cancelModal = {() => dispatch(deselectJob())}
+          addStatus = {h => dispatch(postHistory(h))}
         />
       </div>
     )

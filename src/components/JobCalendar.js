@@ -12,7 +12,7 @@ export default class JobCalendar extends Component {
     let days = []
 
     while ((next = last + DAY) <= today) {
-      let m = history.filter(x => x.time > last && x.time < next) 
+      let m = history.filter(x => x.time > last && x.time < next ) 
       days.push(m) 
       last += DAY
     }

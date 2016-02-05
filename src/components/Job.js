@@ -33,7 +33,6 @@ export default class Job extends Component {
     }
 
     let lastEdit = history.slice(-1)[0]
-    console.log("last edit", lastEdit)
     let editDate = lastEdit ? (new Date(lastEdit.time)).toLocaleDateString() + " - " : ""
 
     return (

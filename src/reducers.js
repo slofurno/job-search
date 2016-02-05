@@ -6,7 +6,8 @@ import {
   SELECT_JOB,
   DESELECT_JOB,
 	DELETE_JOB_SUCCESS,
-  GET_HISTORY_SUCCESS
+  GET_HISTORY_SUCCESS,
+  POST_HISTORY_SUCCESS
 } from './actions'
 
 let emptyJob = {
@@ -44,7 +45,8 @@ function history (state = [], action) {
   switch (action.type) {
   case GET_HISTORY_SUCCESS:
     return action.history
-
+  case POST_HISTORY_SUCCESS:
+    return state.concat([action.history])
   default:
     return state
   } 

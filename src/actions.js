@@ -17,6 +17,7 @@ export const DESELECT_JOB = 'DESELECT_JOB'
 
 export const ADD_HISTORY = 'ADD_HISTORY'
 export const GET_HISTORY_SUCCESS = 'GET_HISTORY_SUCCESS'
+export const POST_HISTORY_SUCCESS = 'POST_HISTORY_SUCCESS'
 
 const jobsUrl = 'http://192.168.1.104:4000/api/jobs'
 const historyUrl = 'http://192.168.1.104:4000/api/history'
@@ -81,6 +82,13 @@ function getHistorySuccess (history) {
   }
 }
 
+function postHistorySuccess (history) {
+  return {
+    type: POST_HISTORY_SUCCESS,
+    history
+  }
+}
+
 export function selectJob (job) {
   return {
     type: SELECT_JOB,
@@ -105,6 +113,22 @@ export function getHistory () {
     })
     .then(parseResponse)
     .then(history => dispatch(getHistorySuccess(history)))
+    .catch(logError)
+  }
+}
+
+export function postHistory (history) {
+  return function (dispatch) {
+    return request ({
+      url: historyUrl,
+      method: "POST",
+      body: JSON.stringify({history}),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+    .then(parseResponse)
+    .then(history => dispatch(postHistorySuccess(history)))
     .catch(logError)
   }
 }
@@ -172,7 +196,6 @@ export function postJob (job) {
         dispatch(postJobFailure(job))
       })
   }
-
 }
 
 

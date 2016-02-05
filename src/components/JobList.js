@@ -19,7 +19,7 @@ export default class JobList extends Component {
 
     return (
       <div className="card job-card" style={{width:"270px", margin:"0 5px"}}>
-      <h3>{title}</h3>
+      <div className="header">{title}</div>
       {joblist}
       </div>
     )

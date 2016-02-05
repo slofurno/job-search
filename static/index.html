@@ -29,7 +29,8 @@ a:active, a:hover {
 }
 body {
   font-size:90%;
-	background-color: whitesmoke;
+	background-color: gainsboro;
+  margin: 0;
 }
 .linear-transition {
   -webkit-transition: all .5s;
@@ -73,49 +74,19 @@ button:active{
   -webkit-box-shadow: none;
   box-shadow: none;
 }
-input{
+input, textarea{
   padding:0.8em 0.6em;
   margin: 0.6em 0;
   width:100%;
-  color:hsl(220, 14%, 71%);
-  background-color: hsl(220,13%,18%);
   outline: none;
-  /*border:2px solid hsl(220, 14%, 50%);*/
-  border-color: hsl(220, 14%, 50%);
-  border-style:solid;
-  border-width: 2px;
-  -webkit-transition: border-color .5s;
-  -moz-transition: border-color .5s;
-  -ms-transition: border-color .5s;
-  -o-transition: border-color .5s;
-  transition: border-color .5s;
 }
-input[type="text"] {
+
+input[type="text"], textarea {
   border-width: 0 0 2px 0;
 }
 input:hover, input:focus, input:active{
-  border-color:springgreen;
 }
-.input {
-  padding:0.8em 0.6em;
-  margin: 0.6em 0;
-  width:100%;
-  color:hsl(220, 14%, 71%);
-  background-color: hsl(220,13%,18%);
-  outline: none;
-  /*border:2px solid hsl(220, 14%, 50%);*/
-  border-color: hsl(220, 14%, 50%);
-  border-style:solid;
-  border-width: 0 0 2px 0;
-  -webkit-transition: border-color .5s;
-  -moz-transition: border-color .5s;
-  -ms-transition: border-color .5s;
-  -o-transition: border-color .5s;
-  transition: border-color .5s;
-}
-.input.active {
-  border-color:springgreen;
-}
+
 .tag{
   display:inline-block;
   background-color:hsl(220, 14%, 71%);
@@ -190,10 +161,22 @@ input:hover, input:focus, input:active{
   margin: 0 2px 2px 0;
 }
 
-.fake-input {
-  background-color:lavender;
+.job-card {
+  background-color: lightsteelblue;
+  border-radius: 4px;
+}
+
+.job-display{
+  background-color:RGBA(255,255,255,.6);
   padding: 6px;
   margin: 0 6px 6px 0;
+  border-radius: 4px;
+  border-bottom: 1px solid lightslategray;
+  padding: 12px 2px;
+}
+
+.job-display:hover {
+  background-color:RGBA(255,255,255,.3);
 }
 
 .small {

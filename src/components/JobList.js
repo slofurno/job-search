@@ -18,7 +18,7 @@ export default class JobList extends Component {
     })
 
     return (
-      <div className="card raised" style={{width:"300px", margin:"0 14px 20px 0"}}>
+      <div className="card job-card" style={{width:"300px", margin:"0 14px 20px 0"}}>
       <h3>{title}</h3>
       {joblist}
       </div>

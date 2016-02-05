@@ -15,7 +15,7 @@ export default class JobModal extends Component {
 		e.preventDefault()
     const name = this.refs.name.value
     const city = this.refs.city.value
-		const post = " HEY"	
+    const post = this.refs.post.value
 		const {id, status} = this.props.selectedJob
     this.props.updateJob({
 			id, name, city, post, status
@@ -26,7 +26,7 @@ export default class JobModal extends Component {
 
     const {updateJob, selectedJob} = this.props
 
-    if (!selectedJob.isSelected) {
+    if (selectedJob.id < 0) {
       return (<div></div>)
     }
 
@@ -51,24 +51,38 @@ export default class JobModal extends Component {
       height: "400px"
     }
 
+    let jobStatus = "nothing"
+
+    if (selectedJob.history) {
+      jobStatus = selectedJob.history.slice(-1)[0].status
+    }
+
     return (
       <div style={background} onClick={e => this.closeModal(e)}>
         <div style={modalContainer} onClick={this.stopP}>
-        <div className={"card"} 
-             style={{
-               backgroundColor:"ghostwhite"
-             }}>
-          <ul>
-            <li>
-            <input type="text" ref="name" defaultValue={selectedJob.name}/>
-            </li>
-
-            <li>
-            <input type="text" ref="city" defaultValue={selectedJob.city}/>
-            </li>
-
-            <li><a href="#" onClick={(e) => this.handleClick(e)}>Save</a></li>
-          </ul>
+          <div className="card job-card">
+            <input 
+              className="job-display" 
+              type="text" ref="name" 
+              defaultValue={selectedJob.name}
+              placeholder="company name" 
+            />
+            <input 
+              className="job-display" 
+              type="text" ref="city" 
+              defaultValue={selectedJob.city}
+              placeholder="city" 
+            />
+            <textarea 
+              rows="8" className="job-display" 
+              ref="post" defaultValue={selectedJob.post}
+            ></textarea>
+            <input 
+              className="job-display" 
+              type="text" ref="status" 
+              defaultValue={jobStatus}
+            />
+            <a href="#" onClick={(e) => this.handleClick(e)}>Save</a>
           </div>
         </div>
       </div>

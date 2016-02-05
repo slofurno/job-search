@@ -38,8 +38,13 @@ html, body {
 body {
   font-size: 14px;
   line-height: 18px;
-	background-color: gainsboro;
+	background-color: steelblue;
   margin: 0;
+/*
+  background: url('http://www.gosugamers.net/images/themes/default/body-bkg-dota2.jpg') top left no-repeat;
+ */ background-size: cover;
+  background-attachment: fixed;
+
 }
 
 .linear-transition {
@@ -163,14 +168,14 @@ input:hover, input:focus, input:active{
 }
 
 .job-card {
-  background-color: lightsteelblue;
-  border-radius: 4px;
+  background-color: silver;
+  border-radius: 2px;
 }
 
 .job-display{
   background-color:RGBA(255,255,255,.6);
-  border-radius: 4px;
   border-bottom: 1px solid lightslategray;
+  border-radius: 2px;
   padding: 6px;
   margin: 0 0 6px 0;
 }
@@ -238,11 +243,27 @@ input:hover, input:focus, input:active{
 }
 
 .link {
-  border-radius: 4px;
   padding: 6px;
   background-color:RGBA(0,0,0,.15);
   text-align: center;
   display: block;
+  border-radius: 2px;
+
+}
+
+.inverted {
+   
+  background-color:RGBA(255,255,255,.15);
+  color: ghostwhite;
+}
+
+.link:hover {
+  background-color:RGBA(0,0,0,.25);
+}
+
+.inverted:hover {
+
+  background-color:RGBA(255,255,255,.25);
 }
 
 .block {
@@ -253,9 +274,6 @@ input:hover, input:focus, input:active{
   cursor: pointer;
 }
 
-.link:hover {
-  background-color:RGBA(0,0,0,.25);
-}
 </style>
 <body>
 	<div id="root" style="height:100%;"></div>

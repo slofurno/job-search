@@ -19,10 +19,10 @@ export default class JobCalendar extends Component {
 
     let blues = [
       "gainsboro",
-      "azure",
+      "lightblue",
       "skyblue",
       "deepskyblue",
-      "royalblue"
+      "dodgerblue"
     ]
 
     let dayDisplay = days.map((x,i) => {

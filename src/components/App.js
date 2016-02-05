@@ -46,12 +46,12 @@ class App extends Component {
           style={{
             width: "100%", 
             backgroundColor: "RGBA(0,0,0,.15)",
-            padding: "4px 6px"
+            padding: "5px"
           }}
         >
         <div className="flex noshrink align-items-center">
           <a href="#" 
-            className="link"
+            className="link inverted"
             onClick={ (e) => {
             e.preventDefault()
             dispatch(newJob()) }}>

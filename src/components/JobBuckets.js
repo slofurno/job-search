@@ -25,7 +25,7 @@ export default class JobBuckets extends Component {
     let jobBuckets = buckets.map((jobs, i) => <JobList key={i} jobs={jobs} title={titles[i]} onJobSelect={onJobSelect} onJobDelete={onJobDelete}/>)
 
     return (
-      <div style={{width:"100%", height:"100%", padding:"10px", whiteSpace:"nowrap", overflowX:"scroll"}}>
+      <div style={{width:"100%", padding:"10px", marginBottom:"20px", whiteSpace:"nowrap", overflowX:"auto"}}>
       <div>{jobBuckets}</div>
       </div>
     )

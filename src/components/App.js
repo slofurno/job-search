@@ -29,11 +29,9 @@ class App extends Component {
 
     let selectedjobmatch = myjobs.filter(job => job.id === selectedJob.id)[0]
     let myselectedjob = selectedjobmatch || selectedJob
-    console.log("selected:", myselectedjob)
-
 
     return (
-      <div style={{height:"100%", position:"relative"}}>
+      <div className="flex column stretch" style={{height:"100%", position:"relative"}}>
         <div style={{
           width: "100%", 
           backgroundColor: "RGBA(0,0,0,.1)",
@@ -46,13 +44,14 @@ class App extends Component {
           </a>
           <JobCalendar jobs={jobs} history={history}/>
         </div>
-        <JobBuckets
-          jobs = {jobs} 
-          history = {history}
-          onJobSelect={job => dispatch(selectJob(job))}
-          onJobDelete ={job => dispatch(deleteJob(job))}
-        />
-
+        <div className="flex grow">
+          <JobBuckets
+            jobs = {myjobs} 
+            history = {history}
+            onJobSelect={job => dispatch(selectJob(job))}
+            onJobDelete ={job => dispatch(deleteJob(job))}
+          />
+        </div>
         <JobModal 
           selectedJob = {myselectedjob} 
           updateJob = {job => dispatch(fn(job))}

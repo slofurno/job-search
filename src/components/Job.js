@@ -10,7 +10,8 @@ export default class Job extends Component {
       name, 
       city, 
       post, 
-      status 
+      status,
+      history
     } = this.props
 
     let editMe = (e) => {
@@ -31,13 +32,18 @@ export default class Job extends Component {
       })
     }
 
+    let lastEdit = history.slice(-1)[0]
+    console.log("last edit", lastEdit)
+    let editDate = lastEdit ? (new Date(lastEdit.time)).toLocaleDateString() + " - " : ""
+
     return (
       <div 
         className="job-display" 
         onClick={editMe} 
       >
+          <span>{editDate}</span>
+          <span>  </span>
           <span>{name}</span>
-          <span>{city}</span>
       </div>
     )
   }

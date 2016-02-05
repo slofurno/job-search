@@ -33,22 +33,22 @@ class App extends Component {
     return (
       <div className="flex column stretch" style={{height:"100%", position:"relative"}}>
         <div 
-          className="flex noshrink" 
+          className="flex noshrink center" 
           style={{
-            height: "32px",
             width: "100%", 
             backgroundColor: "RGBA(0,0,0,.15)",
-            padding: "2px 4px"
+            padding: "4px 6px"
           }}
         >
+        <div className="flex noshrink align-items-center">
           <a href="#" 
-            className="flex noshrink"
-            style={{padding:"6px", backgroundColor:"RGBA(0,0,0,.15)"}} 
+            className="link"
             onClick={ (e) => {
             e.preventDefault()
             dispatch(newJob()) }}>
             Add Job
           </a>
+        </div>
           <JobCalendar jobs={jobs} history={history}/>
         </div>
         <JobBuckets

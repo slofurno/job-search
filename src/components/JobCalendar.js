@@ -36,7 +36,7 @@ export default class JobCalendar extends Component {
     })
  
     return (
-      <div className="flex column center wrap fill pack-end" style={{margin:"0 10px"}}> {dayDisplay} </div>
+      <div className="flex center wrap fill justify-end" style={{margin:"0 10px"}}>{dayDisplay}</div>
     )
   }
 }

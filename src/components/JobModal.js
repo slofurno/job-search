@@ -82,7 +82,7 @@ export default class JobModal extends Component {
               type="text" ref="status" 
               defaultValue={jobStatus}
             />
-            <a href="#" onClick={(e) => this.handleClick(e)}>Save</a>
+            <a className="block link" href="#" onClick={(e) => this.handleClick(e)}>Save</a>
           </div>
         </div>
       </div>

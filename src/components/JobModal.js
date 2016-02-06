@@ -16,7 +16,8 @@ export default class JobModal extends Component {
     const name = this.refs.name.value
     const city = this.refs.city.value
     const post = this.refs.post.value
-		const {id, status} = this.props.selectedJob
+    const status = this.refs.status.value
+		const {id} = this.props.selectedJob
     this.props.updateJob({
 			id, name, city, post, status
 		})
@@ -51,38 +52,36 @@ export default class JobModal extends Component {
       height: "400px"
     }
 
-    /*
-    let jobStatus = "nothing"
-
-    if (selectedJob.history && selectedJob.history.length > 0) {
-      jobStatus = selectedJob.history.slice(-1)[0].status
-    }
-    */
-
     return (
       <div style={background} onClick={e => this.closeModal(e)}>
         <div style={modalContainer} onClick={this.stopP}>
           <div className="card job-card">
+            <h3>{selectedJob.lastStatus}</h3>
             <input 
               className="job-display" 
-              type="text" ref="name" 
+              type="text"
+              ref="name" 
               defaultValue={selectedJob.name}
               placeholder="company name" 
             />
             <input 
               className="job-display" 
-              type="text" ref="city" 
+              type="text" 
+              ref="city" 
               defaultValue={selectedJob.city}
               placeholder="city" 
             />
             <textarea 
-              rows="8" className="job-display" 
-              ref="post" defaultValue={selectedJob.post}
+              rows="8"
+              className="job-display" 
+              ref="post"
+              defaultValue={selectedJob.post}
             ></textarea>
             <input 
               className="job-display" 
-              type="text" ref="status" 
-              defaultValue={selectedJob.lastStatus}
+              type="text"
+              ref="status" 
+              defaultValue={selectedJob.status}
             />
             <a className="link" href="#" onClick={(e) => this.handleClick(e)}>Save</a>
             <a className="link" href="#" onClick={(e) => addStatus({job:selectedJob.id, status:"tevs"})}>Move >>></a>

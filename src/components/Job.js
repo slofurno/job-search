@@ -40,8 +40,6 @@ export default class Job extends Component {
         className="job-display clickable flex noshrink" 
         onClick={editMe} 
       >
-          <span>{editDate}</span>
-          <span>  </span>
           <span>{name}</span>
       </div>
     )

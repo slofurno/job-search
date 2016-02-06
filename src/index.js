@@ -16,6 +16,7 @@ let store = createStore(
 let unsubscribe = store.subscribe(() => 
   console.log(store.getState())
 )
+
 /*
 let job1 = {
   id: 2,
@@ -28,7 +29,6 @@ let job1 = {
 store.dispatch(updateJob(job1))
 //store.dispatch(postJob(job1))
 */
-
 store.dispatch(getJobs())
 store.dispatch(getHistory())
 

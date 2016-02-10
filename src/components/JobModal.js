@@ -48,13 +48,12 @@ export default class JobModal extends Component {
       bottom: "0",
       left: "0",
       right: "0",
-      width: "400px",
       height: "400px"
     }
 
     return (
       <div style={background} onClick={e => this.closeModal(e)}>
-        <div style={modalContainer} onClick={this.stopP}>
+        <div className="modal" style={modalContainer} onClick={this.stopP}>
           <div className="card job-card">
             <h3>{selectedJob.lastStatus}</h3>
             <input 

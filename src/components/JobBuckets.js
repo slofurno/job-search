@@ -15,9 +15,8 @@ export default class JobBuckets extends Component {
 
     let buckets = [[], [], [], [], []]
 
-    let joblist = jobs.forEach(job => {
-      let jobHistory = history.filter(x => x.job === job.id)
-     
+    jobs.forEach(job => {
+      let jobHistory = job.history
       let historyCount = Math.min(buckets.length-1, jobHistory.length) 
       buckets[historyCount].push(job)
     })

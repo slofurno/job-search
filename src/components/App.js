@@ -14,6 +14,8 @@ import {
   postHistory
 } from '../actions'
 
+import appSelector from '../selectors'
+
 const titles = [
   "Nothing",
   "Applied",
@@ -22,23 +24,46 @@ const titles = [
   "Post Interview"
 ]
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onJobSelect: job => {
+      dispatch(selectJob(job))
+    },
+    onJobDelete: job => {
+      dispatch(deleteJob(job))
+    },
+    onModalSave: job => {
+      let fn = job.id >= 0 ? updateJob : postJob
+      dispatch(fn(job))
+    },
+    onModalClose: () => {
+      dispatch(deselectJob())
+    },
+    onAddStatus: (h) => {
+      dispatch(postHistory(h))
+    },
+    onAddJob: () => {
+      dispatch(newJob())
+    }
+  }
+}
+
 class App extends Component {
 
   render () {
-    const { dispatch, jobs, selectedJob, history } = this.props
+    const { 
+      jobs, 
+      selectedJob, 
+      history,
+      onJobSelect,
+      onJobDelete,
+      onModalSave,
+      onModalClose,
+      onAddStatus,
+      onAddJob 
+    } = this.props
 
-    let myjobs = jobs.map(job => {
-      let myhistory = history.filter(x => x.job === job.id)
-      myhistory.sort((a,b) => a.time - b.time)
-      let lastStatus = titles[myhistory.length]
-      return Object.assign({}, job, {lastStatus}, {history: myhistory})
-    })
-
-		let fn = selectedJob.id >= 0 ? updateJob : postJob
-
-    let selectedjobmatch = myjobs.filter(job => job.id === selectedJob.id)[0]
-    let myselectedjob = selectedjobmatch || selectedJob
-
+    console.log("selector", jobs, history, selectedJob)
     return (
       <div className="flex column stretch" style={{height:"100%", position:"relative"}}>
         <div 
@@ -53,33 +78,30 @@ class App extends Component {
           <a href="#" 
             className="link inverted"
             onClick={ (e) => {
-            e.preventDefault()
-            dispatch(newJob()) }}>
+              e.preventDefault()
+              onAddJob()
+            }}>
             Add Job
           </a>
         </div>
           <JobCalendar jobs={jobs} history={history}/>
         </div>
         <JobBuckets
-          jobs = {myjobs} 
+          jobs = {jobs} 
           history = {history}
-          onJobSelect={job => dispatch(selectJob(job))}
-          onJobDelete ={job => dispatch(deleteJob(job))}
+          onJobSelect = {onJobSelect}
+          onJobDelete = {onJobDelete}
         />
         <JobModal 
-          selectedJob = {myselectedjob} 
-          updateJob = {job => dispatch(fn(job))}
-          deleteJob ={job => dispatch(deleteJob(job))}
-					cancelModal = {() => dispatch(deselectJob())}
-          addStatus = {h => dispatch(postHistory(h))}
+          selectedJob = {selectedJob} 
+          updateJob = {onModalSave}
+          deleteJob ={onJobDelete}
+					cancelModal = {onModalClose}
+          addStatus = {onAddStatus}
         />
       </div>
     )
   }
 }
 
-function select (state) {
-  return state;
-}
-
-export default connect(select)(App)
+export default connect(appSelector, mapDispatchToProps)(App)

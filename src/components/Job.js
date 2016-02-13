@@ -1,18 +1,13 @@
-import React, { Component, PropTypes } from 'react'
+import React, { PropTypes } from 'react'
 
-
-export default class Job extends Component {
-  render() {
-    const { 
+const Job = ({ 
       onEditClick, 
-      onDeleteClick,
       id, 
       name, 
       city, 
       post, 
-      status,
-      history
-    } = this.props
+      status
+    }) => { 
 
     let editMe = (e) => {
       e.preventDefault()
@@ -25,16 +20,6 @@ export default class Job extends Component {
       })
     }
 
-    let deleteMe = (e) => {
-      e.preventDefault()
-      onDeleteClick({
-        id
-      })
-    }
-
-    let lastEdit = history.slice(-1)[0]
-    let editDate = lastEdit ? (new Date(lastEdit.time)).toLocaleDateString() + " - " : ""
-
     return (
       <div 
         className="job-display clickable flex noshrink" 
@@ -45,4 +30,4 @@ export default class Job extends Component {
     )
   }
 
-}
+export default Job

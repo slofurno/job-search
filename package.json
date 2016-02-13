@@ -19,5 +19,8 @@
     "redux": "^3.0.6",
     "redux-thunk": "^1.0.3",
     "webpack": "^1.12.12"
+  },
+  "dependencies": {
+    "reselect": "^2.0.3"
   }
 }

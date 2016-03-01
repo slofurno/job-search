@@ -53,7 +53,7 @@ export default class JobModal extends Component {
     return (
       <div style={background} onClick={e => this.closeModal(e)}>
         <div className="modal" style={modalContainer} onClick={this.stopP}>
-          <div className="card job-card">
+          <div className="card job-card flex column">
             <h3>{selectedJob.lastStatus}</h3>
             <input 
               className="job-display" 
@@ -71,7 +71,7 @@ export default class JobModal extends Component {
             />
             <textarea 
               rows="8"
-              className="job-display" 
+              className="job-display flex grow" 
               ref="post"
               defaultValue={selectedJob.post}
             ></textarea>

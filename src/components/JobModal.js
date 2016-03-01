@@ -48,7 +48,6 @@ export default class JobModal extends Component {
       bottom: "0",
       left: "0",
       right: "0",
-      height: "400px"
     }
 
     return (

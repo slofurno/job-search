@@ -19,8 +19,8 @@ export const ADD_HISTORY = 'ADD_HISTORY'
 export const GET_HISTORY_SUCCESS = 'GET_HISTORY_SUCCESS'
 export const POST_HISTORY_SUCCESS = 'POST_HISTORY_SUCCESS'
 
-const jobsUrl = 'http://192.168.1.104:4000/api/jobs'
-const historyUrl = 'http://192.168.1.104:4000/api/history'
+const jobsUrl = 'http://192.168.1.103:4000/api/jobs'
+const historyUrl = 'http://192.168.1.103:4000/api/history'
 
 const tempJob = {}
 

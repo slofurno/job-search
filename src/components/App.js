@@ -63,7 +63,6 @@ class App extends Component {
       onAddJob 
     } = this.props
 
-    console.log("selector", jobs, history, selectedJob)
     return (
       <div className="flex column stretch" style={{height:"100%", position:"relative"}}>
         <div 

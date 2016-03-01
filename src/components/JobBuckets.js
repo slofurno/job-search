@@ -21,7 +21,15 @@ export default class JobBuckets extends Component {
       buckets[historyCount].push(job)
     })
 
-    let jobBuckets = buckets.map((jobs, i) => <JobList key={i} jobs={jobs} title={titles[i]} onJobSelect={onJobSelect} onJobDelete={onJobDelete}/>)
+    let jobBuckets = buckets.map((jobs, i) => 
+      <JobList 
+        key={i} 
+        jobs={jobs} 
+        title={titles[i]} 
+        onJobSelect={onJobSelect} 
+        onJobDelete={onJobDelete}
+      />
+    )
 
     return (
       <div 
@@ -33,9 +41,8 @@ export default class JobBuckets extends Component {
           whiteSpace:"nowrap",
           overflowX:"auto"
       }}>
-      {jobBuckets}
+        {jobBuckets}
       </div>
     )
   }
-
 }

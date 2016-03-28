@@ -1,11 +1,9 @@
 defmodule Jobsearch.Router do
   use Plug.Router
-  use Plug.Builder
   require Logger
   alias Jobsearch.Job
   alias Jobsearch.History
 
-  plug Plug.Static, at: "/", from: "./public"
   plug :match
   plug :dispatch
 
@@ -35,17 +33,25 @@ defmodule Jobsearch.Router do
   post "/jobs" do
     {:ok, body, conn} = read_body(conn, [])
     job = Poison.decode!(body, as: %Job{})
+    job = %{job | id: random_hex()}
 		Sqlitex.Server.query(Sqlitex.Server, "insert into jobs values (?,?,?,?,?)", 
-			[job.id, job.name, job.url, job.city, job.text])
-    send_resp(conn, 200, "thanks")
+			bind: [job.id, job.name, job.url, job.city, job.text])
+
+    conn
+    |> put_resp_content_type("application/json")
+    |> send_resp(200, Poison.encode!(job))
   end
 
   post "/history" do
     {:ok, body, conn} = read_body(conn, [])
     history = Poison.decode!(body, as: %History{})
+    history = %{history | id: random_hex()}
     Sqlitex.Server.query(Sqlitex.Server, "insert into history values (?,?,?,?)",
-			[history.id, history.job, history.status, history.time])
-    send_resp(conn, 200, "thanks")
+			bind: [history.id, history.job, history.status, history.time])
+
+    conn
+    |> put_resp_content_type("application/json")
+    |> send_resp(200, Poison.encode!(history))
   end
 
   match _ do

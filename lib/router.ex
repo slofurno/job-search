@@ -1,9 +1,11 @@
 defmodule Jobsearch.Router do
   use Plug.Router
+  use Plug.Builder
   require Logger
   alias Jobsearch.Job
   alias Jobsearch.History
 
+  plug Plug.Static, at: "/", from: "./public"
   plug :match
   plug :dispatch
 

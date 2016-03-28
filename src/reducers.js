@@ -5,7 +5,7 @@ import {
   UPDATE_JOB_SUCCESS,
   SELECT_JOB,
   DESELECT_JOB,
-	DELETE_JOB_SUCCESS,
+  DELETE_JOB_SUCCESS,
   GET_HISTORY_SUCCESS,
   POST_HISTORY_SUCCESS
 } from './actions'
@@ -70,10 +70,10 @@ function jobs (state = [], action) {
   case GET_JOBS_SUCCESS:
     return action.jobs
 
-	case DELETE_JOB_SUCCESS:
+  case DELETE_JOB_SUCCESS:
     let deletedJob = action.job
     let notDeleted = state.filter(x => x.id !== deletedJob.id)
-		return notDeleted 
+    return notDeleted
 
   default:
     return state

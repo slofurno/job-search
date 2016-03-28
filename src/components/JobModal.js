@@ -3,7 +3,7 @@ import React, { Component, PropTypes } from 'react'
 export default class JobModal extends Component {
   closeModal (e) {
     e.stopPropagation()
-		this.props.cancelModal()
+    this.props.cancelModal()
   }
 
   stopP (e) {
@@ -12,15 +12,15 @@ export default class JobModal extends Component {
 
 
   handleClick(e) {
-		e.preventDefault()
+    e.preventDefault()
     const name = this.refs.name.value
     const city = this.refs.city.value
     const post = this.refs.post.value
     const status = this.refs.status.value
-		const {id} = this.props.selectedJob
+    const {id} = this.props.selectedJob
     this.props.updateJob({
-			id, name, city, post, status
-		})
+      id, name, city, post, status
+    })
   }
 
   render () {

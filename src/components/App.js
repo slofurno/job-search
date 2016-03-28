@@ -5,12 +5,12 @@ import JobCalendar from './JobCalendar'
 import JobBuckets from './JobBuckets'
 import { connect } from 'react-redux'
 import { 
-	postJob, 
-	newJob, 
-	selectJob, 
-	deselectJob, 
-	updateJob,
-	deleteJob,
+  postJob,
+  newJob,
+  selectJob,
+  deselectJob,
+  updateJob,
+  deleteJob,
   postHistory
 } from '../actions'
 
@@ -95,7 +95,7 @@ class App extends Component {
           selectedJob = {selectedJob} 
           updateJob = {onModalSave}
           deleteJob ={onJobDelete}
-					cancelModal = {onModalClose}
+          cancelModal = {onModalClose}
           addStatus = {onAddStatus}
         />
       </div>

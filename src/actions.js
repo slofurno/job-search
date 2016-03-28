@@ -32,23 +32,23 @@ function getJobsSuccess (jobs) {
 }
 
 const _newJob = {
-	name: "",
-	city: "",
-	status: 0,
-	post : ""
+  name: "",
+  city: "",
+  status: 0,
+  post : ""
 }
 
 export function deselectJob () {
-	return {
-		type: DESELECT_JOB
-	}
+  return {
+    type: DESELECT_JOB
+  }
 }
 
 export function newJob () {
-	return {
-		type: SELECT_JOB,
-		job: _newJob				
-	}
+  return {
+    type: SELECT_JOB,
+    job: _newJob
+  }
 }
 
 function addJob (job) {
@@ -147,7 +147,7 @@ export function getJobs () {
 
 export function updateJob (job) {
   return function (dispatch) {
-		dispatch(deselectJob())
+    dispatch(deselectJob())
 
     return request ({
       url: `${jobsUrl}/${job.id}`,
@@ -170,20 +170,20 @@ function deleteJobSuccess (job) {
 }
 
 export function deleteJob (job) {
-	return function(dispatch) {
-		return request({
+  return function(dispatch) {
+    return request({
       url: `${jobsUrl}/${job.id}`,
-			method: "DELETE"
-		})
+      method: "DELETE"
+    })
     .then(() => dispatch(deleteJobSuccess(job)))
     .then(() => dispatch(deselectJob()))
     .catch(logError)
-	}
+  }
 }
 
 export function postJob (job) {
   return function (dispatch) {
-		dispatch(deselectJob())
+    dispatch(deselectJob())
 
     return request ({
       url: jobsUrl,
@@ -193,8 +193,8 @@ export function postJob (job) {
         "Content-Type": "application/json"
       }
     })
-		.then(parseResponse)
-		.then((res) => dispatch(addJob(res)))
+    .then(parseResponse)
+    .then((res) => dispatch(addJob(res)))
       .catch(err => {
         console.log(err);
         dispatch(postJobFailure(job))

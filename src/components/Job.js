@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import {DragSource} from 'react-dnd'
+import { DragSource } from 'react-dnd'
 
 const jobSource = {
   beginDrag(props) {
@@ -9,7 +9,7 @@ const jobSource = {
 
 function collect (connect, monitor) {
   return {
-    connectDragSource: connect:DragSource(),
+    connectDragSource: connect.dragSource(),
     isDragging: monitor.isDragging()
   }
 }

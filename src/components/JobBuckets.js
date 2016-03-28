@@ -1,4 +1,6 @@
 import React, { Component, PropTypes } from 'react'
+import HTML5Backend from 'react-dnd-html5-backend'
+import {DragDropContext} from 'react-dnd'
 import JobList from './JobList'
 
 const titles = [
@@ -9,7 +11,7 @@ const titles = [
   "Post Interview"
 ]
 
-export default class JobBuckets extends Component {
+class JobBuckets extends Component {
   render () {
     const { jobs, history, onJobSelect, onJobDelete } = this.props 
 
@@ -46,3 +48,5 @@ export default class JobBuckets extends Component {
     )
   }
 }
+
+export default DragDropContext(HTML5Backend)(JobBuckets)

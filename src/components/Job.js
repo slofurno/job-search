@@ -1,13 +1,31 @@
-import React, { PropTypes } from 'react'
+import React, { Component, PropTypes } from 'react'
+import {DragSource} from 'react-dnd'
 
-const Job = ({ 
+const jobSource = {
+  beginDrag(props) {
+    return {id: props.id}
+  }
+}
+
+function collect (connect, monitor) {
+  return {
+    connectDragSource: connect:DragSource(),
+    isDragging: monitor.isDragging()
+  }
+}
+
+class Job extends Component { 
+  render () {
+    const {
       onEditClick, 
       id, 
       name, 
       city, 
       post, 
-      status
-    }) => { 
+      status,
+      connectDragSource,
+      isDragging
+    } = this.props
 
     let editMe = (e) => {
       e.preventDefault()
@@ -20,7 +38,7 @@ const Job = ({
       })
     }
 
-    return (
+    return connectDragSource(
       <div 
         className="job-display clickable flex noshrink" 
         onClick={editMe} 
@@ -29,5 +47,6 @@ const Job = ({
       </div>
     )
   }
+}
 
-export default Job
+export default DragSource("JOB", jobSource, collect)(Job)

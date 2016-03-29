@@ -14,8 +14,8 @@ let emptyJob = {
   isSelected: false,
   name: "",
   city: "",
-  post: "",
-  status: 0,
+  text: "",
+  url: "",
   id: -1
 }
 

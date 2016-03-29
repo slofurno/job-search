@@ -13,23 +13,16 @@ const titles = [
 
 class JobBuckets extends Component {
   render () {
-    const { jobs, history, onJobSelect, onJobDelete } = this.props 
+    const { jobs, history, topics, addHistory, onJobSelect, onJobDelete } = this.props 
 
-    let buckets = [[], [], [], [], []]
-
-    jobs.forEach(job => {
-      let jobHistory = job.history
-      let historyCount = Math.min(buckets.length-1, jobHistory.length) 
-      buckets[historyCount].push(job)
-    })
-
-    let jobBuckets = buckets.map((jobs, i) => 
+    let jobBuckets = topics.map((x, i) => 
       <JobList 
         key={i} 
-        jobs={jobs} 
-        title={titles[i]} 
+        jobs={x.jobs} 
+        title={x.topic} 
         onJobSelect={onJobSelect} 
         onJobDelete={onJobDelete}
+        onJobDrop={job => addHistory(job, x.topic)}
       />
     )
 

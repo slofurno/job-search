@@ -39,8 +39,8 @@ const mapDispatchToProps = (dispatch) => {
     onModalClose: () => {
       dispatch(deselectJob())
     },
-    onAddStatus: (h) => {
-      dispatch(postHistory(h))
+    onAddStatus: (job, status) => {
+      dispatch(postHistory({job, status}))
     },
     onAddJob: () => {
       dispatch(newJob())
@@ -55,6 +55,7 @@ class App extends Component {
       jobs, 
       selectedJob, 
       history,
+      topics,
       onJobSelect,
       onJobDelete,
       onModalSave,
@@ -63,6 +64,7 @@ class App extends Component {
       onAddJob 
     } = this.props
 
+    console.log(topics)
     return (
       <div className="flex column stretch" style={{height:"100%", position:"relative"}}>
         <div 
@@ -90,6 +92,8 @@ class App extends Component {
           history = {history}
           onJobSelect = {onJobSelect}
           onJobDelete = {onJobDelete}
+          topics = {topics}
+          addHistory = {onAddStatus}
         />
         <JobModal 
           selectedJob = {selectedJob} 

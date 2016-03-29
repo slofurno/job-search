@@ -11,14 +11,14 @@ defmodule Jobsearch.Router do
     options
   end
 
-  get "/jobs" do
-    jobs = Sqlitex.Server.query(Sqlitex.Server, "select * from jobs", into: %{})
+  get "/api/jobs" do
+    jobs = Sqlitex.Server.query(Sqlitex.Server, "select * from jobs", into: %Job{})
     |> Poison.encode!
 
     send_resp(conn, 200, jobs)
   end
 
-  get "/history" do
+  get "/api/history" do
     history = Sqlitex.Server.query(Sqlitex.Server, "select * from history", into: %{})
     |> Poison.encode!
 
@@ -30,7 +30,7 @@ defmodule Jobsearch.Router do
     send_resp(conn, 200, "received #{inspect(conn.params)}")
   end
 
-  post "/jobs" do
+  post "/api/jobs" do
     {:ok, body, conn} = read_body(conn, [])
     job = Poison.decode!(body, as: %Job{})
     job = %{job | id: random_hex()}
@@ -42,10 +42,15 @@ defmodule Jobsearch.Router do
     |> send_resp(200, Poison.encode!(job))
   end
 
-  post "/history" do
+  get "/api/jobs/:id" do
+    conn
+    |> send_resp(200, "hello #{id}")
+  end
+
+  post "/api/history" do
     {:ok, body, conn} = read_body(conn, [])
     history = Poison.decode!(body, as: %History{})
-    history = %{history | id: random_hex()}
+    history = %{history | id: random_hex(), time: epoch_time()}
     Sqlitex.Server.query(Sqlitex.Server, "insert into history values (?,?,?,?)",
 			bind: [history.id, history.job, history.status, history.time])
 

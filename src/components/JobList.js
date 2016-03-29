@@ -12,7 +12,8 @@ const jobTarget = {
   },
   drop(props, monitor) {
     const item = monitor.getItem()
-    printSomething(item, props)
+    props.onJobDrop(item.id)
+    //printSomething(item, props)
   }
 }
 

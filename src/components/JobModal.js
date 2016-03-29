@@ -15,11 +15,11 @@ export default class JobModal extends Component {
     e.preventDefault()
     const name = this.refs.name.value
     const city = this.refs.city.value
-    const post = this.refs.post.value
-    const status = this.refs.status.value
+    const text = this.refs.text.value
+    const url = this.refs.url.value
     const {id} = this.props.selectedJob
     this.props.updateJob({
-      id, name, city, post, status
+      id, name, city, text, url
     })
   }
 
@@ -72,14 +72,14 @@ export default class JobModal extends Component {
             <textarea 
               rows="8"
               className="job-display flex grow" 
-              ref="post"
-              defaultValue={selectedJob.post}
+              ref="text"
+              defaultValue={selectedJob.text}
             ></textarea>
             <input 
               className="job-display" 
               type="text"
-              ref="status" 
-              defaultValue={selectedJob.status}
+              ref="url" 
+              defaultValue={selectedJob.url}
             />
             <a className="link" href="#" onClick={(e) => this.handleClick(e)}>Save</a>
             <a className="link" href="#" onClick={(e) => addStatus({job:selectedJob.id, status:"tevs"})}>Move >>></a>

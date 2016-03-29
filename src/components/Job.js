@@ -21,8 +21,8 @@ class Job extends Component {
       id, 
       name, 
       city, 
-      post, 
-      status,
+      url, 
+      text,
       connectDragSource,
       isDragging
     } = this.props
@@ -33,8 +33,8 @@ class Job extends Component {
         id,
         name,
         city,
-        status,
-        post 
+        url,
+        text
       })
     }
 

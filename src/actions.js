@@ -19,9 +19,6 @@ export const ADD_HISTORY = 'ADD_HISTORY'
 export const GET_HISTORY_SUCCESS = 'GET_HISTORY_SUCCESS'
 export const POST_HISTORY_SUCCESS = 'POST_HISTORY_SUCCESS'
 
-const jobsUrl = 'http://192.168.1.103:4000/api/jobs'
-const historyUrl = 'http://192.168.1.103:4000/api/history'
-
 const tempJob = {}
 
 function getJobsSuccess (jobs) {
@@ -96,9 +93,8 @@ export function selectJob (job) {
   }
 }
 
-function parseResponse (n) {
-  let response = JSON.parse(n)
-  return response.data
+function parse (n) {
+  return JSON.parse(n)
 }
 
 function logError (err) {
@@ -108,10 +104,10 @@ function logError (err) {
 export function getHistory () {
   return function (dispatch) {
     return request ({
-      url: historyUrl,
+      url: "/api/history",
       method: "GET" 
     })
-    .then(parseResponse)
+    .then(parse)
     .then(history => dispatch(getHistorySuccess(history)))
     .catch(logError)
   }
@@ -120,14 +116,14 @@ export function getHistory () {
 export function postHistory (history) {
   return function (dispatch) {
     return request ({
-      url: historyUrl,
+      url: "/api/history",
       method: "POST",
-      body: JSON.stringify({history}),
+      body: JSON.stringify(history),
       headers: {
         "Content-Type": "application/json"
       }
     })
-    .then(parseResponse)
+    .then(parse)
     .then(history => dispatch(postHistorySuccess(history)))
     .catch(logError)
   }
@@ -136,10 +132,10 @@ export function postHistory (history) {
 export function getJobs () {
   return function (dispatch) {
     return request ({
-      url: jobsUrl,
+      url: "/api/jobs",
       method: "GET"
     })
-    .then(parseResponse)
+    .then(parse)
     .then(jobs => dispatch(getJobsSuccess(jobs)))
     .catch(logError)
   }
@@ -150,9 +146,9 @@ export function updateJob (job) {
     dispatch(deselectJob())
 
     return request ({
-      url: `${jobsUrl}/${job.id}`,
+      url: `/api/jobs/${job.id}`,
       method: "PUT",
-      body: JSON.stringify({job}),
+      body: JSON.stringify(job),
       headers: {
         "Content-Type": "application/json"
       }
@@ -172,7 +168,7 @@ function deleteJobSuccess (job) {
 export function deleteJob (job) {
   return function(dispatch) {
     return request({
-      url: `${jobsUrl}/${job.id}`,
+      url: `/api/jobs/${job.id}`,
       method: "DELETE"
     })
     .then(() => dispatch(deleteJobSuccess(job)))
@@ -186,14 +182,14 @@ export function postJob (job) {
     dispatch(deselectJob())
 
     return request ({
-      url: jobsUrl,
+      url: "/api/jobs",
       method: "POST",
-      body: JSON.stringify({job}),
+      body: JSON.stringify(job),
       headers: {
         "Content-Type": "application/json"
       }
     })
-    .then(parseResponse)
+    .then(parse)
     .then((res) => dispatch(addJob(res)))
       .catch(err => {
         console.log(err);

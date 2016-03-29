@@ -8,6 +8,13 @@ const titles = [
   "Post Interview"
 ]
 
+const topics = [
+  "find",
+  "apply",
+  "interview",
+  "wait"
+]
+
 const rawJobsSelector = (state) => state.jobs
 const historySelector = (state) => state.history
 const rawSelectedJob = (state) => state.selectedJob
@@ -27,22 +34,44 @@ const selectedJobSelector = createSelector(
   }
 )
 
+const topicSelector = createSelector(
+  jobsSelector,
+  (jobs) => {
+    let bytopic = jobs.reduce((a,c) => {
+      a[c.topic] = a[c.topic] ? a[c.topic].concat([c]) : [c]
+      return a
+    }, {})
+
+    return titles.map(x => {
+      return {
+        topic: x,
+        jobs: bytopic[x] || []
+      }
+    })
+  }
+)
+
 const appSelector = createSelector(
   jobsSelector,
   historySelector,
   selectedJobSelector,
-  (jobs, history, selectedJob) => {
-    return {jobs, history, selectedJob}
+  topicSelector,
+  (jobs, history, selectedJob, topics) => {
+    return {jobs, history, selectedJob, topics}
   }
 )
 
-function jobHistory (jobs, history) {
-  return jobs.map(job => {
-    let myhistory = history.filter(x => x.job === job.id)
-    myhistory.sort((a,b) => a.time - b.time)
-    let idx = Math.min(myhistory.length, titles.length - 1)
-    let lastStatus = titles[idx]
-    return Object.assign({}, job, {lastStatus}, {history: myhistory})
+function jobHistory (jobs, histories) {
+    return jobs.map(job => {
+    let history = histories.filter(x => x.job === job.id)
+    history.sort((a,b) => a.time - b.time)
+    let recent = history.slice(-1)[0]
+    let topic = recent ? recent.status : titles[0]
+
+
+    //let idx = Math.min(myhistory.length, titles.length - 1)
+    //let lastStatus = titles[idx]
+    return Object.assign({}, job, {topic, history})
   })
 }
 

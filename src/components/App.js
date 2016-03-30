@@ -4,7 +4,7 @@ import JobModal from './JobModal'
 import JobCalendar from './JobCalendar'
 import JobBuckets from './JobBuckets'
 import { connect } from 'react-redux'
-import { 
+import {
   postJob,
   newJob,
   selectJob,
@@ -51,9 +51,9 @@ const mapDispatchToProps = (dispatch) => {
 class App extends Component {
 
   render () {
-    const { 
-      jobs, 
-      selectedJob, 
+    const {
+      jobs,
+      selectedJob,
       history,
       topics,
       onJobSelect,
@@ -61,22 +61,22 @@ class App extends Component {
       onModalSave,
       onModalClose,
       onAddStatus,
-      onAddJob 
+      onAddJob
     } = this.props
 
     console.log(topics)
     return (
       <div className="flex column stretch" style={{height:"100%", position:"relative"}}>
-        <div 
-          className="flex noshrink center" 
+        <div
+          className="flex noshrink center"
           style={{
-            width: "100%", 
+            width: "100%",
             backgroundColor: "RGBA(0,0,0,.15)",
             padding: "5px"
           }}
         >
         <div className="flex noshrink align-items-center">
-          <a href="#" 
+          <a href="#"
             className="link inverted"
             onClick={ (e) => {
               e.preventDefault()
@@ -96,9 +96,9 @@ class App extends Component {
           addHistory = {onAddStatus}
         />
         <JobModal 
-          selectedJob = {selectedJob} 
+          selectedJob = {selectedJob}
           updateJob = {onModalSave}
-          deleteJob ={onJobDelete}
+          deleteJob = {onJobDelete}
           cancelModal = {onModalClose}
           addStatus = {onAddStatus}
         />

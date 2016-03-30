@@ -62,7 +62,6 @@ function postJobFailure (job) {
 }
 
 function postJobSuccess (job) {
-   
 }
 
 function updateJobSuccess (job) {
@@ -191,10 +190,10 @@ export function postJob (job) {
     })
     .then(parse)
     .then((res) => dispatch(addJob(res)))
-      .catch(err => {
-        console.log(err);
-        dispatch(postJobFailure(job))
-      })
+    .catch(err => {
+      console.log(err);
+      dispatch(postJobFailure(job))
+    })
   }
 }
 

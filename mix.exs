@@ -30,7 +30,7 @@ defmodule Jobsearch.Mixfile do
   defp deps do
     [
       {:cowboy, "~> 1.0.0"},
-      {:plug, "~> 0.12"},
+      {:plug, "~> 1.0"},
       {:sqlitex, "~> 0.8.3"},
       {:poison, "~> 2.1.0"},
     ]

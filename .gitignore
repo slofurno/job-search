@@ -13,7 +13,7 @@
 *.so
 
 node_modules/
-public/bundle.js
+priv/static/bundle.js
 
 /_build
 /cover

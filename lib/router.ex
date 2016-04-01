@@ -1,8 +1,27 @@
+defmodule Jobsearch.Utils do
+  @hex "0123456789abcedf"
+
+  def epoch_time do
+    :os.system_time(:milli_seconds)
+  end
+
+  def random_hex do
+    tevs = for <<a::size(4), b::size(4) <- :crypto.strong_rand_bytes(12)>>,
+        n <- [a, b],
+        do: String.at(@hex, n) 
+
+    tevs
+    |> to_string
+
+  end
+end
+
 defmodule Jobsearch.Router do
   use Plug.Router
   require Logger
   alias Jobsearch.Job
   alias Jobsearch.History
+  alias Jobsearch.Utils
 
   plug :match
   plug :dispatch
@@ -25,15 +44,10 @@ defmodule Jobsearch.Router do
     send_resp(conn, 200, history)
   end
 
-  get "/" do
-    conn = fetch_query_params(conn)
-    send_resp(conn, 200, "received #{inspect(conn.params)}")
-  end
-
   post "/api/jobs" do
     {:ok, body, conn} = read_body(conn, [])
     job = Poison.decode!(body, as: %Job{})
-    job = %{job | id: random_hex()}
+    job = %{job | id: Utils.random_hex()}
 		Sqlitex.Server.query(Sqlitex.Server, "insert into jobs values (?,?,?,?,?)", 
 			bind: [job.id, job.name, job.url, job.city, job.text])
 
@@ -50,7 +64,7 @@ defmodule Jobsearch.Router do
   post "/api/history" do
     {:ok, body, conn} = read_body(conn, [])
     history = Poison.decode!(body, as: %History{})
-    history = %{history | id: random_hex(), time: epoch_time()}
+    history = %{history | id: Utils.random_hex(), time: Utils.epoch_time()}
     Sqlitex.Server.query(Sqlitex.Server, "insert into history values (?,?,?,?)",
 			bind: [history.id, history.job, history.status, history.time])
 
@@ -60,23 +74,7 @@ defmodule Jobsearch.Router do
   end
 
   match _ do
-    IO.inspect(conn.params)
-    send_resp(conn, 404, "oops")
+    conn
   end
 
-  @hex "0123456789abcedf"
-
-  def epoch_time do
-    :os.system_time(:milli_seconds)
-  end
-
-  def random_hex do
-    tevs = for <<a::size(4), b::size(4) <- :crypto.strong_rand_bytes(12)>>,
-        n <- [a, b],
-        do: String.at(@hex, n) 
-
-    tevs
-    |> to_string
-
-  end
 end

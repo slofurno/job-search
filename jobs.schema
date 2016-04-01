@@ -1,0 +1,2 @@
+CREATE TABLE jobs(id text, name text, url text, city text, text text);
+CREATE TABLE history (id text, job text, status text, time integer);

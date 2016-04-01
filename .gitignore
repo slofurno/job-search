@@ -20,3 +20,4 @@ public/bundle.js
 /deps
 erl_crash.dump
 *.ez
+*.db

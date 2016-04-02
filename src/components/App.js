@@ -11,7 +11,8 @@ import {
   deselectJob,
   updateJob,
   deleteJob,
-  postHistory
+  postHistory,
+  deleteHistory
 } from '../actions'
 
 import appSelector from '../selectors'
@@ -30,10 +31,11 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(selectJob(job))
     },
     onJobDelete: job => {
-      dispatch(deleteJob(job))
+      let fn = job.id === -1 ? deselectJob : deleteJob 
+      dispatch(fn(job))
     },
     onModalSave: job => {
-      let fn = job.id >= 0 ? updateJob : postJob
+      let fn = job.id === -1 ? postJob : updateJob
       dispatch(fn(job))
     },
     onModalClose: () => {
@@ -44,7 +46,8 @@ const mapDispatchToProps = (dispatch) => {
     },
     onAddJob: () => {
       dispatch(newJob())
-    }
+    },
+    onDeleteHistory: (history) => dispatch(deleteHistory(history)) 
   }
 }
 
@@ -61,10 +64,10 @@ class App extends Component {
       onModalSave,
       onModalClose,
       onAddStatus,
-      onAddJob
+      onAddJob,
+      onDeleteHistory
     } = this.props
 
-    console.log(topics)
     return (
       <div className="flex column stretch" style={{height:"100%", position:"relative"}}>
         <div
@@ -101,6 +104,7 @@ class App extends Component {
           deleteJob = {onJobDelete}
           cancelModal = {onModalClose}
           addStatus = {onAddStatus}
+          onDeleteHistory = {onDeleteHistory}
         />
       </div>
     )

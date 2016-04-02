@@ -26,6 +26,28 @@ defmodule Jobsearch.Router do
     send_resp(conn, 200, history)
   end
 
+  put "/api/jobs/:id" do
+    {:ok, body, conn} = read_body(conn, [])
+    job = Poison.decode!(body, as: %Job{})
+		Sqlitex.Server.query(Sqlitex.Server, "update jobs set name=?, url=?, city=?, text=? where id = ?",
+			bind: [job.name, job.url, job.city, job.text, id])
+
+    conn
+    |> put_resp_content_type("application/json")
+    |> send_resp(200, Poison.encode!(job))
+  end
+  
+  delete "/api/jobs/:id" do
+		Sqlitex.Server.query(Sqlitex.Server, "delete from jobs where id=?", bind: [id])
+    conn
+    |> send_resp(200, "deleted #{id}")
+  end
+
+  delete "/api/history/:id" do
+    conn
+    |> send_resp(200, "deleted #{id}")
+  end
+
   post "/api/jobs" do
     {:ok, body, conn} = read_body(conn, [])
     job = Poison.decode!(body, as: %Job{})

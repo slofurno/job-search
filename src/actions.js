@@ -16,6 +16,7 @@ export const SELECT_JOB = 'SELECT_JOB'
 export const DESELECT_JOB = 'DESELECT_JOB'
 
 export const ADD_HISTORY = 'ADD_HISTORY'
+export const DELETE_HISTORY = 'DELETE_HISTORY'
 export const GET_HISTORY_SUCCESS = 'GET_HISTORY_SUCCESS'
 export const POST_HISTORY_SUCCESS = 'POST_HISTORY_SUCCESS'
 
@@ -28,13 +29,6 @@ function getJobsSuccess (jobs) {
   }
 }
 
-const _newJob = {
-  name: "",
-  city: "",
-  status: 0,
-  post : ""
-}
-
 export function deselectJob () {
   return {
     type: DESELECT_JOB
@@ -43,8 +37,7 @@ export function deselectJob () {
 
 export function newJob () {
   return {
-    type: SELECT_JOB,
-    job: _newJob
+    type: CREATE_NEW_JOB
   }
 }
 
@@ -82,6 +75,13 @@ function postHistorySuccess (history) {
   return {
     type: POST_HISTORY_SUCCESS,
     history
+  }
+}
+
+function deleteHistorySuccess (id) {
+  return {
+    type: DELETE_HISTORY,
+    id
   }
 }
 
@@ -124,6 +124,17 @@ export function postHistory (history) {
     })
     .then(parse)
     .then(history => dispatch(postHistorySuccess(history)))
+    .catch(logError)
+  }
+}
+
+export function deleteHistory (id) {
+  return function (dispatch) {
+    return request({
+      url: `/api/history/${id}`,
+      method: "DELETE"
+    })
+    .then(() => dispatch(deleteHistorySuccess(id)))
     .catch(logError)
   }
 }

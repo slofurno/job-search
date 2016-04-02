@@ -45,7 +45,7 @@ class JobList extends Component {
       return (
         <Job {...job} 
           key={job.id} 
-          onEditClick={onJobSelect}
+          onClick = {e => onJobSelect(job)}
         />
       )
     })

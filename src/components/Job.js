@@ -17,7 +17,7 @@ function collect (connect, monitor) {
 class Job extends Component { 
   render () {
     const {
-      onEditClick, 
+      onClick, 
       id, 
       name, 
       city, 
@@ -27,21 +27,10 @@ class Job extends Component {
       isDragging
     } = this.props
 
-    let editMe = (e) => {
-      e.preventDefault()
-      onEditClick({
-        id,
-        name,
-        city,
-        url,
-        text
-      })
-    }
-
     return connectDragSource(
       <div 
         className="job-display clickable flex noshrink" 
-        onClick={editMe} 
+        onClick={onClick} 
       >
           <span>{name}</span>
       </div>

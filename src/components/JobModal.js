@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import Since from './Since'
 
 export default class JobModal extends Component {
   closeModal (e) {
@@ -24,12 +25,13 @@ export default class JobModal extends Component {
   }
 
   render () {
+    const {updateJob, deleteJob, selectedJob, addStatus, onDeleteHistory} = this.props
 
-    const {updateJob, deleteJob, selectedJob, addStatus} = this.props
-
-    if (selectedJob.id < 0) {
+    if (!selectedJob.isSelected) {
       return (<div></div>)
     }
+
+    const {history} = selectedJob
 
     let background = {
       position: "fixed",
@@ -82,8 +84,13 @@ export default class JobModal extends Component {
               defaultValue={selectedJob.url}
             />
             <a className="link" href="#" onClick={(e) => this.handleClick(e)}>Save</a>
-            <a className="link" href="#" onClick={(e) => addStatus({job:selectedJob.id, status:"tevs"})}>Move >>></a>
             <a className="link" href="#" onClick={(e) => deleteJob(selectedJob)}>Delete</a>
+            <ul>
+              { history.map(({id, time, status}) => <li 
+                  className="job-display"
+                  key = {id}
+                  onClick = {e => onDeleteHistory(id)}>{status}{"   "}<Since epoch={time}/></li>) }
+            </ul>
           </div>
         </div>
       </div>

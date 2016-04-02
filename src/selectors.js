@@ -29,10 +29,11 @@ const selectedJobSelector = createSelector(
   rawSelectedJob,
   jobsSelector,
   (selectedJob, jobs) => {
-    return selectedJob
 
     let selectedjobmatch = jobs.filter(job => job.id === selectedJob.id)[0]
-    return selectedjobmatch || selectedJob
+    let ok = selectedjobmatch || selectedJob
+    //TODO: fixme
+    return Object.assign({}, ok, {isSelected: selectedJob.isSelected})
   }
 )
 

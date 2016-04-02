@@ -84,7 +84,7 @@ export default class JobModal extends Component {
               defaultValue={selectedJob.url}
             />
             <a className="link" href="#" onClick={(e) => this.handleClick(e)}>Save</a>
-            <a className="link" href="#" onClick={(e) => deleteJob(selectedJob)}>Delete</a>
+            <a className="link" href="#" onClick={(e) => e.preventDefault() || deleteJob(selectedJob)}>Delete</a>
             <ul>
               { history.map(({id, time, status}) => <li 
                   className="job-display"

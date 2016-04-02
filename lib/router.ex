@@ -44,6 +44,7 @@ defmodule Jobsearch.Router do
   end
 
   delete "/api/history/:id" do
+		Sqlitex.Server.query(Sqlitex.Server, "delete from history where id=?", bind: [id])
     conn
     |> send_resp(200, "deleted #{id}")
   end

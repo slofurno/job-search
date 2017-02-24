@@ -20,7 +20,7 @@ defmodule Jobsearch.Router do
   end
 
   get "/api/history" do
-    history = Sqlitex.Server.query(Sqlitex.Server, "select * from history", into: %{})
+    history = Sqlitex.Server.query(Sqlitex.Server, "select * from history", into: %History{})
     |> Poison.encode!
 
     send_resp(conn, 200, history)
@@ -38,6 +38,7 @@ defmodule Jobsearch.Router do
   end
   
   delete "/api/jobs/:id" do
+    #TODO: delete related histories
 		Sqlitex.Server.query(Sqlitex.Server, "delete from jobs where id=?", bind: [id])
     conn
     |> send_resp(200, "deleted #{id}")
